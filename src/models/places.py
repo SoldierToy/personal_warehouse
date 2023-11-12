@@ -1,6 +1,5 @@
 from .base import BaseORM
-from sqlalchemy.orm import Mapped, relationship, mapped_column
-from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, relationship
 from .products import ProductsORM
 
 
