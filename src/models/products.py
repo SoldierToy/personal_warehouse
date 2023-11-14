@@ -18,23 +18,23 @@ class ProductsORM(BaseORM):
 
     price: Mapped[int]
     selling_price: Mapped[int]
-    repair_price: Mapped[int]
+    repair_price: Mapped[int] = mapped_column(nullable=True)
     profit: Mapped[int]
     receipt_date: Mapped[datetime.date]
     sale_date: Mapped[datetime.date]
-    comment: Mapped[str]
+    comment: Mapped[str] = mapped_column(nullable=True)
 
     place: Mapped["PlacesORM"] = relationship(
         back_populates="product",
         uselist=False)
-    place_fk: Mapped[int] = mapped_column(ForeignKey('places.id'))
+    place_fk: Mapped[int] = mapped_column(ForeignKey('places.id'), nullable=True)
 
     status: Mapped["StatusesORM"] = relationship(
         back_populates="product",
         uselist=False)
-    status_fk: Mapped[int] = mapped_column(ForeignKey('statuses.id'))
+    status_fk: Mapped[int] = mapped_column(ForeignKey('statuses.id'), nullable=True)
 
     product_location: Mapped["ProductLocationsORM"] = relationship(
         back_populates="products",
         uselist=False)
-    product_location_fk: Mapped[int] = mapped_column(ForeignKey('product_locations.id'))
+    product_location_fk: Mapped[int] = mapped_column(ForeignKey('product_locations.id'), nullable=True)
