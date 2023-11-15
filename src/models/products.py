@@ -35,6 +35,10 @@ class ProductsORM(BaseORM):
     status_fk: Mapped[int] = mapped_column(ForeignKey('statuses.id'), nullable=True)
 
     product_location: Mapped["ProductLocationsORM"] = relationship(
-        back_populates="products",
+        back_populates="product",
         uselist=False)
     product_location_fk: Mapped[int] = mapped_column(ForeignKey('product_locations.id'), nullable=True)
+
+    image_paths: Mapped["ImagePaths"] = relationship(
+        back_populates='product')
+
