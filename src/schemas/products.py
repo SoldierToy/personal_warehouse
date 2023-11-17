@@ -1,20 +1,21 @@
 import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
 
 class ProductsSchema(BaseModel):
     id: int
-    name: str | None
-    user_fk: int
-    product_type_fk: int
-    price: int | None
-    selling_price: int | None
-    repair_price: int | None
-    profit: int | None
-    receipt_date: datetime.date | None
-    sale_date: datetime.date | None
-    comment: str | None
-    place_fk: int | None
-    status_fk: int | None
-    product_location_fk: int | None
+    name: str
+    user_id: int
+    product_type: str
+    price: Optional[int]
+    selling_price: Optional[int]
+    repair_price:Optional[int]
+    profit: Optional[int]
+    receipt_date: Optional[datetime.date]
+    sale_date: Optional[datetime.date]
+    comment: Optional[str]
+    place: Optional[str]
+    status: Optional[str]
+    product_location: Optional[str]
