@@ -7,6 +7,6 @@ class PlacesORM(BaseORM):
     __tablename__ = "places"
 
     product: Mapped["ProductsORM"] = relationship(
-        back_populates="place_purchase",
+        back_populates="place",
         uselist=False)
 
