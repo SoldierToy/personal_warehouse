@@ -14,14 +14,14 @@ class ProductsORM(BaseORM):
     product_type_id: Mapped["ProductTypesORM"] = relationship(
         back_populates="product",
         uselist=False)
-    product_type_fk: Mapped[int] = mapped_column(ForeignKey('product_types.id'))
+    product_type_fk: Mapped[int] = mapped_column(ForeignKey('product_types.id'), nullable=True)
 
-    price: Mapped[int]
-    selling_price: Mapped[int]
+    price: Mapped[int] = mapped_column(nullable=True)
+    selling_price: Mapped[int] = mapped_column(nullable=True)
     repair_price: Mapped[int] = mapped_column(nullable=True)
-    profit: Mapped[int]
-    receipt_date: Mapped[datetime.date]
-    sale_date: Mapped[datetime.date]
+    profit: Mapped[int] = mapped_column(nullable=True)
+    receipt_date: Mapped[datetime.date] = mapped_column(nullable=True)
+    sale_date: Mapped[datetime.date] = mapped_column(nullable=True)
     comment: Mapped[str] = mapped_column(nullable=True)
 
     place: Mapped["PlacesORM"] = relationship(
@@ -41,4 +41,3 @@ class ProductsORM(BaseORM):
 
     image_paths: Mapped["ImagePaths"] = relationship(
         back_populates='product')
-
