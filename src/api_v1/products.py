@@ -7,7 +7,7 @@ router = APIRouter(prefix="/products", tags=['products'])
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
-async def create_products(
+async def create_product(
         products: ProductsCreateSchema,
         products_service=Depends(products_service_depend)
 ):
