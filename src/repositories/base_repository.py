@@ -6,16 +6,33 @@ from sqlalchemy import insert, delete, update, select
 class SQLAlchemyRepository(AbstractRepository):
     model = None
 
-    async def add_one(self, data: dict) -> int:
+    async def add_one(self, data: dict):
         async with async_session_maker() as session:
             stmt = insert(self.model).values(**data).returning(self.model.id)
-            res = await session.execute(stmt)
+            await session.execute(stmt)
             await session.commit()
-            return res.scalar_one()
 
     async def find_all(self):
         async with async_session_maker() as session:
             stmt = select(self.model)
             res = await session.execute(stmt)
-            res = [row[0].to_read_model() for row in res.all()]
+            res = res.scalars().all()
             return res
+
+    async def find_one(self, obj_id):
+        async with async_session_maker() as session:
+            stmt = select(self.model).filter_by(id=obj_id)
+            res = await session.execute(stmt)
+            return res.scalar_one()
+
+    async def del_one(self, obj_id: int):
+        async with async_session_maker() as session:
+            stmt = delete(self.model).filter_by(id=obj_id)
+            await session.execute(stmt)
+            await session.commit()
+
+    async def update_one(self, obj_id: int, data):
+        async with async_session_maker() as session:
+            stmt = update(self.model).filter_by(id=obj_id).values(**data)
+            await session.execute(stmt)
+            await session.commit()

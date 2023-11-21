@@ -12,3 +12,18 @@ class AbstractRepository(ABC):
     @abstractstaticmethod
     async def find_all():
         raise NotImplementedError
+
+    @abstractmethod
+    @abstractstaticmethod
+    async def find_one(self, data):
+        raise NotImplementedError
+
+    @abstractmethod
+    @abstractstaticmethod
+    async def del_one(self, data):
+        raise NotImplementedError
+
+    @abstractmethod
+    @abstractstaticmethod
+    async def update_one(self, data):
+        raise NotImplementedError
