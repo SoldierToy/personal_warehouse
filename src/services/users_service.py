@@ -1,4 +1,3 @@
-# from src.repositories.abstract_repository import AbstractRepository
 from typing import Type
 
 from src.repositories.users_repository import UsersRepository
